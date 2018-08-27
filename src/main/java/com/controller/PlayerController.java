@@ -41,8 +41,8 @@ public class PlayerController {
     }
 
     public boolean moveLeft() {
-        if (this.playerModel.getY() > 1) {
-            this.playerModel.setY(this.playerModel.getY() - 1);
+        if (this.playerModel.getX() > 1) {
+            this.playerModel.setX(this.playerModel.getX() - 1);
             return (true);
         }
         else {
@@ -51,8 +51,8 @@ public class PlayerController {
     }
 
     public boolean moveRight() {
-        if (this.playerModel.getY() > 1) {
-            this.playerModel.setY(this.playerModel.getY() + 1);
+        if (this.playerModel.getX() > 1) {
+            this.playerModel.setX(this.playerModel.getX() + 1);
             return (true);
         }
         else {

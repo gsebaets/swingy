@@ -9,26 +9,8 @@ public class PlayerModel {
     private int attack;
     private int defence;
     private int hitPoints;
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
     private int x;
     private int y;
-
 
     public PlayerModel(String name, String ClassP, int level, int Experience, int Attack,
                        int defence, int hitPoints) {
@@ -39,6 +21,8 @@ public class PlayerModel {
         this.attack = Attack;
         this.defence = defence;
         this.hitPoints = hitPoints;
+        this.x = 0;
+        this.y = 0;
     }
 
     public String getName() {
@@ -86,5 +70,10 @@ public class PlayerModel {
         this.hitPoints = hitPoints;
     }
 
+    public int getX() { return x; }
+    public void setX(int x) { this.x = x; }
+
+    public int getY() { return y; }
+    public void setY(int y) { this.y = y; }
 }
 
