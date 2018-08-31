@@ -28,4 +28,9 @@ public abstract class Console_View extends Player_View implements Display {
     {
 
     }
+
+//    private String selectRank()
+//    {
+//
+//    }
 }
