@@ -28,9 +28,4 @@ public abstract class ArenaConsoleView extends Player_View implements Display {
     {
 
     }
-
-//    private String selectRank()
-//    {
-//
-//    }
 }
