@@ -4,7 +4,7 @@ import main.java.com.controller.PlayerController;
 import main.java.com.model.PlayerModel;
 import java.util.List;
 
-public abstract class Console_View extends Player_View implements Display {
+public abstract class ArenaConsoleView extends Player_View implements Display {
 
     private String name;
     private String ClassP;
