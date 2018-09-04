@@ -6,6 +6,11 @@ import java.util.List;
 
 public abstract class PlayerGuiView extends Player_View implements Display {
 
+    public void selectPlayer(List<PlayerModel> players)
+    {
+
+    }
+
     public void createPlayer(PlayerModel playerModel)
     {
 
@@ -13,11 +18,7 @@ public abstract class PlayerGuiView extends Player_View implements Display {
 
     public int  choosePlayer(PlayerController controller)
     {
+
         return 0;
-    }
-
-    public void selectPlayer(List<PlayerModel> players)
-    {
-
     }
 }

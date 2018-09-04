@@ -21,8 +21,9 @@ public abstract class PlayerConsoleView extends Player_View implements Display {
         int attempt = 0;
 
         do{
-            if (attempt > 0)
+            if (attempt > 0) {
                 System.out.println("ERROR");
+            }
             System.out.println("Available Ranks");
             System.out.println("(1) Hokage ");
             System.out.println("(2) Anbu");
@@ -38,6 +39,10 @@ public abstract class PlayerConsoleView extends Player_View implements Display {
         else
             return("Jonin");
     }
+    public void selectPlayer(List<PlayerModel> players)
+    {
+
+    }
 
     public void createPlayer(PlayerModel playerModel)
     {
@@ -49,8 +54,4 @@ public abstract class PlayerConsoleView extends Player_View implements Display {
         return 0;
     }
 
-    public void selectPlayer(List<PlayerModel> players)
-    {
-
-    }
 }
