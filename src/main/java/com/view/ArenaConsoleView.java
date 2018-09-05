@@ -21,6 +21,7 @@ public abstract class ArenaConsoleView extends Player_View implements Display {
 
     public int  choosePlayer(PlayerController controller)
     {
+
         return 0;
     }
 
