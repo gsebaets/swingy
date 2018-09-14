@@ -2,12 +2,6 @@ package main.java.com.view;
 
 import main.java.com.controller.PlayerController;
 import main.java.com.model.PlayerModel;
-
-
-
-
-
-
 import java.util.List;
 import java.util.Scanner;
 
