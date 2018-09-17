@@ -1,6 +1,7 @@
 package main.java.com.controller;
 
 import main.java.com.model.*;
+import main.java.com.view.PlayerConsoleView;
 
 import java.util.List;
 
@@ -19,54 +20,43 @@ public class PlayerController {
         this.enemies.add(enemy);
     }
 
+    public void fightingSimulation(){
 
-    public boolean moveUp() {
-        if (this.playerModel.getY() > 1) {
-            this.playerModel.setY(this.playerModel.getY() - 1);
-            return (true);
-        }
-        else {
-            return (false);
-        }
     }
 
-    public boolean movedown() {
-        if (this.playerModel.getY() > 1) {
-            this.playerModel.setY(this.playerModel.getY() + 1);
-            return (true);
-        }
-        else {
-            return (false);
-        }
+    private int attacking(PlayerModel tempPlayer){
+        int attackPoint;
+        String attackReport;
+
+        attackPoint = tempPlayer.getAttack();
+        attackReport = tempPlayer.getName() + "Strikes with" + tempPlayer.getAttack() + "Damage";
+        this.arenaView.fightUpdate(attackReport);
+        return (attackPoint);
     }
 
-    public boolean moveLeft() {
-        if (this.playerModel.getX() > 1) {
-            this.playerModel.setX(this.playerModel.getX() - 1);
-            return (true);
-        }
-        else {
-            return (false);
-        }
+    public void adding_XP(PlayerModel heroWon, PlayerModel enemyLost){
+
     }
 
-    public boolean moveRight() {
-        if (this.playerModel.getX() > 1) {
-            this.playerModel.setX(this.playerModel.getX() + 1);
-            return (true);
-        }
-        else {
-            return (false);
-        }
+    public void gettingHit(PlayerModel tempPlayer, int attackPoint){
+
     }
 
-    public boolean checkCollision() {
-        for (PlayerModel tempEnemy : enemies) {
-            if (this.playerModel.getX() == tempEnemy.getX() &&
-                    this.playerModel.getY() == tempEnemy.getY()) {
-                return (true);
-            }
+    public int loadPlayer(){
+        int option;
+
+        if ((option = this.playerView.loadPlayer(this)) == 1){
+            this.newPlayer();
         }
-        return (false);
+        else if(option == 2){
+            this.choosePlayer();
+        }
+        else if (playerView instanceof PlayerConsoleView){
+            System.out.println("EXITING");
+        }
+        return (3);
+    }
+
+    public void newPlayer(){
     }
 }

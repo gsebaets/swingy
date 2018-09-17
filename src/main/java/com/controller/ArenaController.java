@@ -64,7 +64,7 @@ public class ArenaController {
     public void fighting(PlayerModel fightRival) {
         String prepFight;
         PlayerModel play1;
-        PlayerModel play2;
+        PlayerModel play-2;
 
         //COLLISION detection
         enemyModel = fightRival;
