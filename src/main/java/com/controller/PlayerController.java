@@ -16,6 +16,8 @@ public class PlayerController {
         this.playerModel = playerModel;
     }
 
+    public void registerHero()
+
     public void registerEnemy(PlayerModel enemy) {
         this.enemies.add(enemy);
     }
@@ -29,7 +31,7 @@ public class PlayerController {
         String attackReport;
 
         attackPoint = tempPlayer.getAttack();
-        attackReport = tempPlayer.getName() + "Strikes with" + tempPlayer.getAttack() + "Damage";
+        attackReport = tempPlayer.getName() + " Strikes with " + tempPlayer.getAttack() + " Damage.";
         this.arenaView.fightUpdate(attackReport);
         return (attackPoint);
     }

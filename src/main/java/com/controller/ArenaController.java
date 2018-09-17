@@ -106,7 +106,7 @@ public class ArenaController {
     {
         switch (option){
             case 1: //North
-                this.playerModel.setY(this.playerModel.getY() + 1);
+                this.playerModel.setY(this.playerModel.getY() - 1);
                 break;
             case 2: //East
                 this.playerModel.setX(this.playerModel.getX() + 1);
@@ -117,6 +117,15 @@ public class ArenaController {
             case 4: //South
                 this.playerModel.setY(this.playerModel.getY() + 1);
                 break;
+        }
+    }
+
+    private void  createEnemy(){
+        int numberOfEnemies;
+
+        numberOfEnemies = width;
+        for(int x = 0; x < numberOfEnemies; x++){
+            PlayerModel tempEnemy = new PlayerModel(RandomEnemy(), getRank());
         }
     }
 }
