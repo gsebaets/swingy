@@ -1,6 +1,8 @@
 package main.java.com.controller;
 
 import main.java.com.model.PlayerModel;
+import main.java.com.view.ArenaView;
+
 import java.util.List;
 import java.util.Random;
 
@@ -10,6 +12,7 @@ public class ArenaController {
     private PlayerModel enemyModel;
     private List<PlayerModel> enemies;
     private char[][] arena;
+    private ArenaView arenaView;
     int width;
     int height;
 
@@ -58,8 +61,18 @@ public class ArenaController {
         tempHero.setDefence(tempHero.getDefence() * (tempHero.getLevel() / 2));
     }
 
-    public void fighting() {
+    public void fighting(PlayerModel fightRival) {
+        String prepFight;
+        PlayerModel play1;
+        PlayerModel play2;
 
+        //COLLISION detection
+        enemyModel = fightRival;
+        prepFight = this.playerModel.getName() + "BATTLING" + fightRival.getName() + "\n";
+        prepFight += "############################################";
+        this.arenaView.prepFight(prepFight);
+        fightController. new PlayerController(this.playerModel, fightRival, this.arenaView, this);
+        fightController.fighting();
     }
 
     private void buildArena() {
@@ -69,7 +82,7 @@ public class ArenaController {
         arena = new char[wholeMap][wholeMap];
         for (int y = 0; y < wholeMap; y++) {
             for (int x = 0; x < wholeMap; x++) {
-                arena[y][x] = ' ';
+                arena[y][x] = '*';
             }
         }
 
@@ -86,6 +99,24 @@ public class ArenaController {
                     arena[y][x] = '$';
                 }
             }
+        }
+    }
+
+    public void movement(int option)
+    {
+        switch (option){
+            case 1: //North
+                this.playerModel.setY(this.playerModel.getY() + 1);
+                break;
+            case 2: //East
+                this.playerModel.setX(this.playerModel.getX() + 1);
+                break;
+            case 3: //West
+                this.playerModel.setX(this.playerModel.getX() - 1);
+                break;
+            case 4: //South
+                this.playerModel.setY(this.playerModel.getY() + 1);
+                break;
         }
     }
 }

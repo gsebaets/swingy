@@ -64,6 +64,6 @@ public abstract class ArenaConsoleView extends Player_View implements Display {
             option = this.getKey();
             keyPressed = (option >= 0 && option <= 4);
         }while(!keyPressed);
-       // this.arenaController
+        this.arenaController.movement(option);
     }
 }
