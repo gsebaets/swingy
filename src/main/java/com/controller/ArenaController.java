@@ -64,7 +64,7 @@ public class ArenaController {
     public void fighting(PlayerModel fightRival) {
         String prepFight;
         PlayerModel play1;
-        PlayerModel play-2;
+        PlayerModel play2;
 
         //COLLISION detection
         enemyModel = fightRival;
@@ -125,7 +125,10 @@ public class ArenaController {
 
         numberOfEnemies = width;
         for(int x = 0; x < numberOfEnemies; x++){
-            PlayerModel tempEnemy = new PlayerModel(RandomEnemy(), getRank());
+            PlayerModel tempEnemy = new PlayerModel(RandomEnemy(), getClassP());
+            setStats((tempEnemy));
+            randomPlayerPosition(tempEnemy);
+            this.registerEnemy(tempEnemy);
         }
     }
 }

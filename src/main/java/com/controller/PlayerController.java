@@ -37,7 +37,9 @@ public class PlayerController {
     }
 
     public void adding_XP(PlayerModel heroWon, PlayerModel enemyLost){
-
+        int XP_total;
+        int Attack_total;
+        int nextStage;
     }
 
     public void gettingHit(PlayerModel tempPlayer, int attackPoint){
