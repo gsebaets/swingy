@@ -66,4 +66,23 @@ public abstract class ArenaConsoleView extends Player_View implements Display {
         }while(!keyPressed);
         this.arenaController.movement(option);
     }
+
+    public void fightOrFlight(PlayerModel enemy, ArenaController tempArenaControl){
+
+        int option;
+
+            do {
+                System.out.print("Do you want to fight " + enemy.getName());
+                System.out.print(" with XP " + enemy.getExperience());
+                System.out.println(" and level " + enemy.getLevel() + " fighter");
+                System.out.println("1 > Fight");
+                System.out.println("2 > Run");
+                option = this.getKey();
+            } while (option < 1 && option > 2);
+            if (option == 1) {
+                tempArenaControl.fighting(enemy);
+                return ;
+            }
+        tempArenaControl.goBack();
+    }
 }

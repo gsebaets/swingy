@@ -1,7 +1,7 @@
 package main.java.com.controller;
 
 import main.java.com.model.*;
-import main.java.com.view.PlayerConsoleView;
+import main.java.com.view.*;
 
 import java.util.List;
 
@@ -16,9 +16,12 @@ public class PlayerController {
         this.playerModel = playerModel;
     }
 
-    public void registerHero()
+    public void registerHero() {
+
+    }
 
     public void registerEnemy(PlayerModel enemy) {
+
         this.enemies.add(enemy);
     }
 
@@ -32,7 +35,6 @@ public class PlayerController {
 
         attackPoint = tempPlayer.getAttack();
         attackReport = tempPlayer.getName() + " Strikes with " + tempPlayer.getAttack() + " Damage.";
-        this.arenaView.fightUpdate(attackReport);
         return (attackPoint);
     }
 
@@ -47,18 +49,12 @@ public class PlayerController {
     }
 
     public int loadPlayer(){
-        int option;
 
-        if ((option = this.playerView.loadPlayer(this)) == 1){
-            this.newPlayer();
-        }
-        else if(option == 2){
-            this.choosePlayer();
-        }
-        else if (playerView instanceof PlayerConsoleView){
-            System.out.println("EXITING");
-        }
-        return (3);
+        return (1);
+    }
+
+    public int choosePlayer(){
+        return (1);
     }
 
     public void newPlayer(){

@@ -1,7 +1,7 @@
 package main.java.com.controller;
 
 import main.java.com.model.PlayerModel;
-import main.java.com.view.ArenaView;
+import main.java.com.view.*;
 
 import java.util.List;
 import java.util.Random;
@@ -62,17 +62,6 @@ public class ArenaController {
     }
 
     public void fighting(PlayerModel fightRival) {
-        String prepFight;
-        PlayerModel play1;
-        PlayerModel play2;
-
-        //COLLISION detection
-        enemyModel = fightRival;
-        prepFight = this.playerModel.getName() + "BATTLING" + fightRival.getName() + "\n";
-        prepFight += "############################################";
-        this.arenaView.prepFight(prepFight);
-        fightController. new PlayerController(this.playerModel, fightRival, this.arenaView, this);
-        fightController.fighting();
     }
 
     private void buildArena() {
@@ -102,8 +91,7 @@ public class ArenaController {
         }
     }
 
-    public void movement(int option)
-    {
+    public void movement(int option) {
         switch (option){
             case 1: //North
                 this.playerModel.setY(this.playerModel.getY() - 1);
@@ -120,15 +108,18 @@ public class ArenaController {
         }
     }
 
-    private void  createEnemy(){
-        int numberOfEnemies;
-
-        numberOfEnemies = width;
-        for(int x = 0; x < numberOfEnemies; x++){
-            PlayerModel tempEnemy = new PlayerModel(RandomEnemy(), getClassP());
-            setStats((tempEnemy));
-            randomPlayerPosition(tempEnemy);
-            this.registerEnemy(tempEnemy);
-        }
+    public void	goBack() {
     }
+
+    private void randomPlayerPosition(){
+
+    }
+
+    private void registerEnemy() {
+
+    }
+
+    private void  createEnemy(){
+
+        }
 }
