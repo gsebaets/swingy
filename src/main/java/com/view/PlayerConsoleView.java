@@ -2,9 +2,6 @@ package main.java.com.view;
 
 import main.java.com.controller.PlayerController;
 import main.java.com.model.PlayerModel;
-
-import javax.sound.midi.SysexMessage;
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,8 +12,6 @@ public class PlayerConsoleView extends Player_View implements Display {
     private Scanner             scanner;
 
     public PlayerConsoleView(){
-        //scanner = new Scanner(System.in);
-        //createPlayer();
     }
 
     private String  getPlayerRank(){
@@ -27,7 +22,7 @@ public class PlayerConsoleView extends Player_View implements Display {
             if (attempt > 0) {
                 System.out.println("ERROR");
             }
-            System.out.println("Available Ranks");
+            System.out.println("\nAvailable Ranks");
             System.out.println("(1) Hokage ");
             System.out.println("(2) Anbu");
             System.out.println("(3) Jonin");
@@ -50,20 +45,17 @@ public class PlayerConsoleView extends Player_View implements Display {
     public void createPlayer()
     {
         PlayerModel playerModel;
-        String name, classP, temp;
+        String name, temp;
         int level;
 
         scanner = new Scanner(System.in);
 
-        System.out.println("Enter player name : ");
+        System.out.println("\nEnter player name : ");
         name = scanner.nextLine();
         System.out.println(getPlayerRank());
-        classP = scanner.nextLine();
         System.out.println("Enter Level : ");
         temp = scanner.nextLine();
         level = Integer.parseInt(temp);
-
-
     }
 
     public int  choosePlayer(PlayerController controller)
