@@ -2,17 +2,20 @@ package main.java.com.view;
 
 import main.java.com.controller.PlayerController;
 import main.java.com.model.PlayerModel;
+
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Scanner;
 
-public abstract class PlayerConsoleView extends Player_View implements Display {
+public class PlayerConsoleView extends Player_View implements Display {
 
     private PlayerController    playerController;
     private PlayerModel         playerModel;
     private Scanner             scanner;
 
     public PlayerConsoleView(){
-        scanner = new Scanner(System.in);
+        //scanner = new Scanner(System.in);
+        //createPlayer();
     }
 
     private String  getPlayerRank(){
@@ -45,7 +48,8 @@ public abstract class PlayerConsoleView extends Player_View implements Display {
 
     public void createPlayer(PlayerModel playerModel)
     {
-
+        System.out.println("Enter player name : ");
+        scanner = new Scanner(System.in);
     }
 
     public int  choosePlayer(PlayerController controller)
@@ -53,4 +57,30 @@ public abstract class PlayerConsoleView extends Player_View implements Display {
         return 0;
     }
 
+    public void refresh() {
+
+    }
+
+    public void    startMenu() {
+        String temp;
+        boolean valid;
+
+        System.out.println("******START MENU******");
+        System.out.println();
+        do {
+           // valid = false;
+            System.out.println("======================");
+            System.out.println("|| 1. Create Player ||");
+            System.out.println("|| 2. Load Player   ||");
+            System.out.println("======================");
+            System.out.println();
+            System.out.print("Option : ");
+            scanner = new Scanner(System.in);
+            temp = scanner.nextLine();
+            valid = (temp.equals("1") || temp.equals("2"));
+
+            if(!valid)
+                System.out.println("\nInvalid option (1 or 2)");
+        }while(!valid);
+     }
 }

@@ -10,4 +10,5 @@ public abstract class Player_View {
     public abstract void    createPlayer(PlayerModel playerModel);
     public abstract int     choosePlayer(PlayerController controller);
     public abstract void    selectPlayer(List<PlayerModel> players);
+    public abstract void    startMenu();
 }

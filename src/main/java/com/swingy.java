@@ -10,14 +10,12 @@ public class swingy {
         PlayerController playerController;
         Display display;
 
+
         if (args.length > 0) {
             if (args[0].equals("console")) {
-                display = new PlayerConsoleView() {
-                    @Override
-                    public void refresh() {
-
-                    }
-                };
+                display = new PlayerConsoleView();
+                playerController = new PlayerController(display);
+                playerController.startMenu();
             }
             else {
                 System.out.println("Invalid Choice");
@@ -26,12 +24,7 @@ public class swingy {
         }
         else {
             System.out.println("Revert to Console");
-            display = new PlayerConsoleView() {
-                @Override
-                public void refresh() {
-
-                }
-            };
+            display = new PlayerConsoleView();
         }
         if (display == null) {
             System.out.println("Display Error");

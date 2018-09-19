@@ -10,7 +10,12 @@ public class PlayerController {
     private PlayerModel playerModel;
     private ArenaController arenaController;
     private List<PlayerModel> enemies;
+    private Player_View display;
 
+
+    public PlayerController(Display view) {
+        this.display = (Player_View)view;
+    }
 
     public PlayerController(PlayerModel playerModel) {
         this.playerModel = playerModel;
@@ -58,5 +63,10 @@ public class PlayerController {
     }
 
     public void newPlayer(){
+
+    }
+
+    public void startMenu() {
+        this.display.startMenu();
     }
 }

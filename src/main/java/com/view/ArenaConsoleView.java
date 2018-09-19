@@ -72,11 +72,11 @@ public abstract class ArenaConsoleView extends Player_View implements Display {
         int option;
 
             do {
-                System.out.print("Do you want to fight " + enemy.getName());
-                System.out.print(" with XP " + enemy.getExperience());
-                System.out.println(" and level " + enemy.getLevel() + " fighter");
-                System.out.println("1 > Fight");
-                System.out.println("2 > Run");
+                System.out.print("Do you choose to fight " + enemy.getName() + " XP = " + enemy.getExperience() + " level = " + enemy.getLevel() + "?");
+                System.out.println("==============");
+                System.out.println("|| 1. Fight ||");
+                System.out.println("|| 2. Run   ||");
+                System.out.println("==============");
                 option = this.getKey();
             } while (option < 1 && option > 2);
             if (option == 1) {
