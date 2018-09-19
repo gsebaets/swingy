@@ -67,6 +67,16 @@ public class PlayerController {
     }
 
     public void startMenu() {
-        this.display.startMenu();
+        this.display.startMenu(this);
+    }
+
+    public void updatePlayerChoice(int option) {
+        if (option == 1) {
+            this.display.createPlayer();
+        }
+        else if (option == 2) {
+           // this.display.choosePlayer();
+
+        }
     }
 }

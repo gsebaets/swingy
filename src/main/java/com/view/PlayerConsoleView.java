@@ -3,6 +3,7 @@ package main.java.com.view;
 import main.java.com.controller.PlayerController;
 import main.java.com.model.PlayerModel;
 
+import javax.sound.midi.SysexMessage;
 import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Scanner;
@@ -46,10 +47,23 @@ public class PlayerConsoleView extends Player_View implements Display {
 
     }
 
-    public void createPlayer(PlayerModel playerModel)
+    public void createPlayer()
     {
-        System.out.println("Enter player name : ");
+        PlayerModel playerModel;
+        String name, classP, temp;
+        int level;
+
         scanner = new Scanner(System.in);
+
+        System.out.println("Enter player name : ");
+        name = scanner.nextLine();
+        System.out.println("Enter Class : ");
+        classP = scanner.nextLine();
+        System.out.println("Enter Level : ");
+        temp = scanner.nextLine();
+        level = Integer.parseInt(temp);
+
+
     }
 
     public int  choosePlayer(PlayerController controller)
@@ -61,10 +75,11 @@ public class PlayerConsoleView extends Player_View implements Display {
 
     }
 
-    public void    startMenu() {
+    public void    startMenu(PlayerController playerController) {
         String temp;
         boolean valid;
 
+        this.playerController = playerController;
         System.out.println("******START MENU******");
         System.out.println();
         do {
@@ -82,5 +97,6 @@ public class PlayerConsoleView extends Player_View implements Display {
             if(!valid)
                 System.out.println("\nInvalid option (1 or 2)");
         }while(!valid);
+        this.playerController.updatePlayerChoice(Integer.parseInt(temp));
      }
 }
