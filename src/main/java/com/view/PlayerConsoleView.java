@@ -31,7 +31,7 @@ public class PlayerConsoleView extends Player_View implements Display {
             System.out.println("(1) Hokage ");
             System.out.println("(2) Anbu");
             System.out.println("(3) Jonin");
-            System.out.println("Choose : ");
+            System.out.print("\nChoose : ");
             temp = scanner.nextLine();
         }
         while(!temp.equals(1) && !temp.equals(2) && !temp.equals(3));
@@ -57,7 +57,7 @@ public class PlayerConsoleView extends Player_View implements Display {
 
         System.out.println("Enter player name : ");
         name = scanner.nextLine();
-        System.out.println("Enter Class : ");
+        System.out.println(getPlayerRank());
         classP = scanner.nextLine();
         System.out.println("Enter Level : ");
         temp = scanner.nextLine();
