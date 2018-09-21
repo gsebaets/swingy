@@ -37,8 +37,7 @@ public class PlayerConsoleView extends Player_View implements Display {
         else
             return("Jonin");
     }
-    public void selectPlayer(List<PlayerModel> players)
-    {
+    public void selectPlayer(List<PlayerModel> players) {
 
     }
 
@@ -87,7 +86,7 @@ public class PlayerConsoleView extends Player_View implements Display {
             valid = (temp.equals("1") || temp.equals("2"));
 
             if(!valid)
-                System.out.println("\nInvalid option (1 or 2)");
+                System.out.println("\nInvalid Option (1 or 2)");
         }while(!valid);
         this.playerController.updatePlayerChoice(Integer.parseInt(temp));
      }
