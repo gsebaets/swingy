@@ -1,7 +1,7 @@
-package main.java.com.controller;
+package com.controller;
 
-import main.java.com.model.*;
-import main.java.com.view.*;
+import com.model.*;
+import com.view.*;
 
 import java.util.List;
 

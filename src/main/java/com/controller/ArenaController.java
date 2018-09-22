@@ -1,7 +1,7 @@
-package main.java.com.controller;
+package com.controller;
 
-import main.java.com.model.PlayerModel;
-import main.java.com.view.*;
+import com.model.PlayerModel;
+import com.view.*;
 
 import java.util.List;
 import java.util.Random;
@@ -32,33 +32,24 @@ public class ArenaController {
         return (names[Akatsuki.nextInt(5)]);
     }
 
-    private void setStats(PlayerModel tempHero) {
+    public static PlayerModel setStats(String name, String rank, int level) {
         Random rand = new Random();
-
-        tempHero.setLevel(rand.nextInt(playerModel.getLevel() + 2) + 1);
-        tempHero.setHitPoints(100);
-        switch (tempHero.getClassP()) {
+        PlayerModel tempHero = null;
+        int exp = (int)(level*1000+Math.pow((double)(level - 1), 2.0) * 450);
+        switch (rank) {
             case "Hokage":
-                tempHero.setExperience(300);
-                tempHero.setAttack(25);
-                tempHero.setDefence(25);
+                tempHero = new PlayerModel(name, rank,level, exp,25, 25,100);
                 break;
 
             case "Anbu":
-                tempHero.setExperience(250);
-                tempHero.setAttack(15);
-                tempHero.setDefence(10);
+                tempHero = new PlayerModel(name, rank,level, exp,15, 15,100);
                 break;
 
             case "Jonin":
-                tempHero.setExperience(150);
-                tempHero.setAttack(5);
-                tempHero.setDefence(5);
+                tempHero = new PlayerModel(name, rank,level, exp,5, 5,100);
                 break;
         }
-        tempHero.setExperience(tempHero.getExperience() * tempHero.getLevel());
-        tempHero.setAttack(tempHero.getAttack() * tempHero.getLevel());
-        tempHero.setDefence(tempHero.getDefence() * (tempHero.getLevel() / 2));
+        return (tempHero);
     }
 
     public void fighting(PlayerModel fightRival) {

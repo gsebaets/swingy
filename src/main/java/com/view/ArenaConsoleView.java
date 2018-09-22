@@ -1,8 +1,8 @@
-package main.java.com.view;
+package com.view;
 
-import main.java.com.controller.ArenaController;
-import main.java.com.controller.PlayerController;
-import main.java.com.model.PlayerModel;
+import com.controller.ArenaController;
+import com.controller.PlayerController;
+import com.model.PlayerModel;
 
 import javax.swing.text.html.Option;
 import java.util.List;

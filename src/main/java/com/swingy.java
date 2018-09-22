@@ -1,7 +1,7 @@
-package main.java.com;
+package com;
 
-import main.java.com.controller.PlayerController;
-import main.java.com.view.*;
+import com.controller.PlayerController;
+import com.view.*;
 
 public class swingy {
 

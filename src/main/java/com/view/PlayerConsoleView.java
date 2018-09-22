@@ -1,9 +1,10 @@
-package main.java.com.view;
+package com.view;
 
-import main.java.com.controller.PlayerController;
-import main.java.com.model.PlayerModel;
-import java.util.List;
-import java.util.Scanner;
+
+import com.controller.*;
+import com.model.PlayerModel;
+import java.util.*;
+import javax.validation.*;
 
 public class PlayerConsoleView extends Player_View implements Display {
 
@@ -16,12 +17,9 @@ public class PlayerConsoleView extends Player_View implements Display {
 
     private String  getPlayerRank(){
         String temp;
-        int attempt = 0;
 
         do{
-            if (attempt > 0) {
-                System.out.println("ERROR");
-            }
+
             System.out.println("\nAvailable Ranks");
             System.out.println("(1) Hokage ");
             System.out.println("(2) Anbu");
@@ -29,10 +27,10 @@ public class PlayerConsoleView extends Player_View implements Display {
             System.out.print("\nChoose : ");
             temp = scanner.nextLine();
         }
-        while(!temp.equals(1) && !temp.equals(2) && !temp.equals(3));
-        if(temp.equals(1))
+        while(!temp.equals("1") && !temp.equals("2") && !temp.equals("3"));
+        if(temp.equals("1"))
             return("Hokage");
-        else if(temp.equals(2))
+        else if(temp.equals("2"))
             return("Anbu");
         else
             return("Jonin");
@@ -44,17 +42,22 @@ public class PlayerConsoleView extends Player_View implements Display {
     public void createPlayer()
     {
         PlayerModel playerModel;
-        String name, temp;
+        String name, temp, rank;
         int level;
 
         scanner = new Scanner(System.in);
 
         System.out.println("\nEnter player name : ");
         name = scanner.nextLine();
-        System.out.println(getPlayerRank());
+        rank = getPlayerRank();
+        System.out.println(rank);
         System.out.println("Enter Level : ");
         temp = scanner.nextLine();
         level = Integer.parseInt(temp);
+        PlayerModel hero = ArenaController.setStats(name, rank, level);
+        if (!validatePlayer(hero))
+            createPlayer();
+        //else todo we need to print the map
     }
 
     public int  choosePlayer(PlayerController controller)
@@ -74,7 +77,6 @@ public class PlayerConsoleView extends Player_View implements Display {
         System.out.println("******START MENU******");
         System.out.println();
         do {
-           // valid = false;
             System.out.println("======================");
             System.out.println("|| 1. Create Player ||");
             System.out.println("|| 2. Load Player   ||");
@@ -89,5 +91,20 @@ public class PlayerConsoleView extends Player_View implements Display {
                 System.out.println("\nInvalid Option (1 or 2)");
         }while(!valid);
         this.playerController.updatePlayerChoice(Integer.parseInt(temp));
+     }
+
+     private boolean validatePlayer(PlayerModel playerModel)
+     {
+         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+         Validator validator = factory.getValidator();
+
+         Set<ConstraintViolation<PlayerModel>> constraintViolations = validator.validate(playerModel);
+         if (constraintViolations.size() > 0 )
+         {
+             for (ConstraintViolation<PlayerModel> constraints : constraintViolations)
+                 System.out.println(constraints);
+             return (false);
+         }
+         return (true);
      }
 }

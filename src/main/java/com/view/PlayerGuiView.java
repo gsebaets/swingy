@@ -1,7 +1,7 @@
-package main.java.com.view;
+package com.view;
 
-import main.java.com.controller.PlayerController;
-import main.java.com.model.PlayerModel;
+import com.controller.PlayerController;
+import com.model.PlayerModel;
 import java.util.List;
 
 public abstract class PlayerGuiView extends Player_View implements Display {
