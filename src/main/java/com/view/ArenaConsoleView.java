@@ -10,47 +10,49 @@ import java.util.Scanner;
 
 public abstract class ArenaConsoleView extends Player_View implements Display {
 
-    private ArenaController arenaController;
-    private PlayerModel playerModel;
-    private char map[][];
 
-    private int getKey(){
-        String stringOption;
-        int option;
+
+    private static int getKey(){
+        String stringOption="";
         Scanner scan =  new Scanner(System.in);
-
-        try{
-            stringOption = scan.nextLine();
-            option = Integer.parseInt(stringOption);
-            return (getKey());
+        while (true)
+        {
+            System.out.print("Option: ");
+            if (scan.hasNextLine())
+                stringOption = scan.nextLine();
+            else
+                System.exit(0);
+            if (stringOption.matches("^\\d$") && Integer.parseInt(stringOption) >= 1 && Integer.parseInt(stringOption)<=5)
+                break;
         }
-        catch (Exception error){
-            System.out.println("Invalid Option");
-            return (getKey());
-        }
+        return (Integer.parseInt(stringOption));
     }
 
-    private void printMap(){
-        int width;
-        int height;
+    public static void printDetails(PlayerModel hero, int wholeMap){
+
         int option;
-        boolean keyPressed;
 
-        width = this.map[0].length;
-        height = this.map.length;
+        System.out.println("Warrior :" + hero.getName());
+        System.out.println("XP :" + hero.getExperience());
+        System.out.println("Health :" + hero.getHitPoints());
 
-        System.out.print("Warrior :" + this.playerModel.getName());
-        System.out.print("XP :" + this.playerModel.getExperience());
-        System.out.print("Health :" + this.playerModel.getHitPoints());
 
-        for (int y = 0; y < height; y++){
-            for(int x = 0; x < width; x++){
-                System.out.print(map[y][x]);
+
+        for (int y = 0; y < wholeMap; y++){
+            for (int x = 0; x < wholeMap; x++)
+            {
+                if(ArenaController.arena[y][x] != '*')
+                    System.out.print("[ "+ArenaController.arena[y][x] +" ]");
+                else
+                    System.out.print("[   ]");
             }
             System.out.println();
-        }
 
-        do{
+        }
+        if(ArenaController.enemyEncountered(hero)) {
+            fightOrFlight(ArenaController.getEnemy(hero));
+        }
+        else {
             System.out.println("Navigation");
             System.out.println("==============");
             System.out.println("|| 1. North ||");
@@ -60,14 +62,12 @@ public abstract class ArenaConsoleView extends Player_View implements Display {
             System.out.println("==============");
             System.out.println("|| 5. Close ||");
             System.out.println("==============");
-            System.out.print("Option : ");
-            option = this.getKey();
-            keyPressed = (option >= 0 && option <= 4);
-        }while(!keyPressed);
-        this.arenaController.movement(option);
+            option = getKey();
+            ArenaController.movement(option, hero);
+        }
     }
 
-    public void fightOrFlight(PlayerModel enemy, ArenaController tempArenaControl){
+    public static void fightOrFlight(PlayerModel enemy){
 
         int option;
 
@@ -77,12 +77,12 @@ public abstract class ArenaConsoleView extends Player_View implements Display {
                 System.out.println("|| 1. Fight ||");
                 System.out.println("|| 2. Run   ||");
                 System.out.println("==============");
-                option = this.getKey();
+                option = getKey();
             } while (option < 1 && option > 2);
             if (option == 1) {
-                tempArenaControl.fighting(enemy);
+                ArenaController.fighting(enemy);
                 return ;
             }
-        tempArenaControl.goBack();
+        ArenaController.goBack();
     }
 }

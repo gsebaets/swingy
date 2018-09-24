@@ -57,7 +57,11 @@ public class PlayerConsoleView extends Player_View implements Display {
         PlayerModel hero = ArenaController.setStats(name, rank, level);
         if (!validatePlayer(hero))
             createPlayer();
-        //else todo we need to print the map
+        else{
+            int wholeMap = ArenaController.buildArena(hero);
+            while (ArenaController.randerGame(hero, wholeMap));
+        }
+
     }
 
     public int  choosePlayer(PlayerController controller)

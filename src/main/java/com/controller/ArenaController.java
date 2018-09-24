@@ -3,6 +3,7 @@ package com.controller;
 import com.model.PlayerModel;
 import com.view.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -10,8 +11,8 @@ public class ArenaController {
 
     private PlayerModel playerModel;
     private PlayerModel enemyModel;
-    private List<PlayerModel> enemies;
-    private char[][] arena;
+    private static List<PlayerModel> enemies;
+    public static char[][] arena;
     private ArenaView arenaView;
     int width;
     int height;
@@ -26,14 +27,13 @@ public class ArenaController {
         return (Rank[Fighter.nextInt(3)]);
     }
 
-    private String RandomEnemy() {
+    private static String RandomEnemy() {
         Random Akatsuki = new Random();
         String names[] = {"Deidara", "Itachi", "Nagato", "Tobi", "Hidan"};
         return (names[Akatsuki.nextInt(5)]);
     }
 
     public static PlayerModel setStats(String name, String rank, int level) {
-        Random rand = new Random();
         PlayerModel tempHero = null;
         int exp = (int)(level*1000+Math.pow((double)(level - 1), 2.0) * 450);
         switch (rank) {
@@ -52,14 +52,16 @@ public class ArenaController {
         return (tempHero);
     }
 
-    public void fighting(PlayerModel fightRival) {
+    public static void fighting(PlayerModel fightRival) {
 
     }
 
-    private void buildArena() {
+    public static int buildArena(PlayerModel hero) {
         int wholeMap;
 
-        wholeMap = this.width + 2;
+        wholeMap = (hero.getLevel() - 1) * 5 + 10 - (hero.getLevel() % 2);
+        hero.setY(wholeMap/2);
+        hero.setX(wholeMap/2);
         arena = new char[wholeMap][wholeMap];
         for (int y = 0; y < wholeMap; y++) {
             for (int x = 0; x < wholeMap; x++) {
@@ -67,77 +69,79 @@ public class ArenaController {
             }
         }
 
-        arena[this.playerModel.getY() + 1][this.playerModel.getX() + 1] = 'H';
-        for (PlayerModel tempEnemy : this.enemies) {
-            arena[tempEnemy.getY() + 1][tempEnemy.getX() + 1] = 'E';
-        }
+        arena[hero.getY()][hero.getX()] = 'H';
+        randomPlayerPosition(hero, wholeMap);
 
-        for (int y = 0; y < wholeMap; y++) {
-            arena[y][0] = '$';
-            arena[y][wholeMap - 1] = '$';
-            if (y == 0 || (y == wholeMap - 1)) {
-                for (int x = 1; x < (wholeMap - 1); x++) {
-                    arena[y][x] = '$';
-                }
-            }
-        }
+        return (wholeMap);
     }
 
-    private void randomPlayerPosition(PlayerModel tempEnemy){
+    private static void randomPlayerPosition(PlayerModel hero, int wholeMap){
         Random	rand = new Random();
-        boolean	conflict;
-        int		i;
-        int		maxEnemies;
+        int		maxEnemies = rand.nextInt((wholeMap * wholeMap) / 2) + 1;
+        enemies = new ArrayList<>();
 
-        do {
-            //conflict = false;
-            i = -1;
-            maxEnemies = this.enemies.size();
-            tempEnemy.setPosition(rand.nextInt(this.width), rand.nextInt(this.height));
-            conflict = ((tempEnemy.getX() == this.playerModel.getX()) &&
-                    (tempEnemy.getY() == this.playerModel.getY()));
-            while (!conflict && ++i <  maxEnemies) {
-                conflict = ((tempEnemy.getX() == this.enemies.get(i).getX()) &&
-                        tempEnemy.getY() == this.enemies.get(i).getY());
-            }
-        } while (conflict);
+        for(int i = 1; i <= maxEnemies; i++){
+
+            int x;
+            int y;
+
+            do {
+                 x = rand.nextInt(wholeMap);
+                 y = rand.nextInt(wholeMap);
+            }while((x == hero.getX() && y == hero.getY()) || arena[y][x] != '*');
+                PlayerModel enemy = new PlayerModel(RandomEnemy(), "Akatsuki");
+                enemy.setX(x);
+                enemy.setY(y);
+                arena[y][x] = 'E';
+            enemies.add(enemy);
+        }
     }
 
-    public void movement(int option) {
+    public static boolean enemyEncountered (PlayerModel hero){
+
+        for(PlayerModel enemy: enemies) {
+            if (enemy.getX() == hero.getX() && enemy.getY() == hero.getY())
+                return true;
+        }
+        return false;
+    }
+
+    public static PlayerModel getEnemy(PlayerModel hero){
+
+        for(PlayerModel enemy: enemies) {
+            if (enemy.getX() == hero.getX() && enemy.getY() == hero.getY())
+                return enemy;
+        }
+        return null;
+    }
+
+    public static void movement(int option, PlayerModel hero) {
+
+        arena[hero.getY()][hero.getX()] = '*';
         switch (option){
             case 1: //North
-                this.playerModel.setY(this.playerModel.getY() - 1);
+                hero.setY(hero.getY() - 1);
                 break;
             case 2: //East
-                this.playerModel.setX(this.playerModel.getX() + 1);
+                hero.setX(hero.getX() + 1);
                 break;
             case 3: //West
-                this.playerModel.setX(this.playerModel.getX() - 1);
+                hero.setX(hero.getX() - 1);
                 break;
             case 4: //South
-                this.playerModel.setY(this.playerModel.getY() + 1);
+                hero.setY(hero.getY() + 1);
                 break;
         }
+        arena[hero.getY()][hero.getX()] = 'H';
     }
 
-    public void	goBack() {
+    public  static boolean randerGame(PlayerModel hero, int wholeMap){
+        ArenaConsoleView.printDetails(hero, wholeMap);
+
+        return (true);
     }
 
-    private void registerEnemy(PlayerModel enemy) {
-        this.enemies.add(enemy);
+    public static void	goBack() {
+
     }
-
-    private void  createEnemy(){
-
-        int	numEnemies;
-
-        numEnemies = width;
-        for (int x = 0; x < numEnemies; x++) {
-            PlayerModel tempEnemy = new PlayerModel(RandomEnemy(), getRank());
-         //   setStats(tempEnemy);
-            randomPlayerPosition(tempEnemy);
-            this.registerEnemy(tempEnemy);
-        }
-    }
-
 }

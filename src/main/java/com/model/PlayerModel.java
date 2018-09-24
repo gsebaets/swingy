@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.util.Random;
 
 public class PlayerModel {
 
@@ -40,6 +41,13 @@ public class PlayerModel {
     {
         this.name = name;
         this.ClassP = ClassP;
+
+         this.level = 0;
+         this.experience = 0;
+        Random rand = new Random();
+        this.defence = rand.nextInt(50 - 25 + 1) + 25;
+        this.attack = rand.nextInt(25 -10 + 1) + 10;
+        this.hitPoints = rand.nextInt(250 - 100 + 1) + 100;
     }
     public PlayerModel(String name, String ClassP, int level, int Experience, int Attack,
                        int defence, int hitPoints) {
