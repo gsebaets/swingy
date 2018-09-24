@@ -53,6 +53,7 @@ public class ArenaController {
     }
 
     public void fighting(PlayerModel fightRival) {
+
     }
 
     private void buildArena() {
@@ -82,6 +83,26 @@ public class ArenaController {
         }
     }
 
+    private void randomPlayerPosition(PlayerModel tempEnemy){
+        Random	rand = new Random();
+        boolean	conflict;
+        int		i;
+        int		maxEnemies;
+
+        do {
+            //conflict = false;
+            i = -1;
+            maxEnemies = this.enemies.size();
+            tempEnemy.setPosition(rand.nextInt(this.width), rand.nextInt(this.height));
+            conflict = ((tempEnemy.getX() == this.playerModel.getX()) &&
+                    (tempEnemy.getY() == this.playerModel.getY()));
+            while (!conflict && ++i <  maxEnemies) {
+                conflict = ((tempEnemy.getX() == this.enemies.get(i).getX()) &&
+                        tempEnemy.getY() == this.enemies.get(i).getY());
+            }
+        } while (conflict);
+    }
+
     public void movement(int option) {
         switch (option){
             case 1: //North
@@ -102,15 +123,21 @@ public class ArenaController {
     public void	goBack() {
     }
 
-    private void randomPlayerPosition(){
-
-    }
-
-    private void registerEnemy() {
-
+    private void registerEnemy(PlayerModel enemy) {
+        this.enemies.add(enemy);
     }
 
     private void  createEnemy(){
 
+        int	numEnemies;
+
+        numEnemies = width;
+        for (int x = 0; x < numEnemies; x++) {
+            PlayerModel tempEnemy = new PlayerModel(RandomEnemy(), getRank());
+         //   setStats(tempEnemy);
+            randomPlayerPosition(tempEnemy);
+            this.registerEnemy(tempEnemy);
         }
+    }
+
 }

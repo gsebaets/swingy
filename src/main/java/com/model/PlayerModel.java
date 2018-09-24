@@ -1,17 +1,20 @@
 package com.model;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 public class PlayerModel {
 
-    @NotNull
+    @NotNull (message = "Name can't be empty")
+    @Length(min = 4, max = 15, message = "Length between 5 -15 and not empty")
     private String name;
-    @NotNull
+    @NotNull(message = "Class can't be blank")
     private String ClassP;
     @NotNull
-    @Max(value = 7, message = "Level cannot pass 2")
+    @Max(value = 30, message = "Level cannot pass 2")
     @Min(value = 1, message = "Level cannot be bellow 1")
     private int level;
     @NotNull
@@ -29,11 +32,15 @@ public class PlayerModel {
     @Max(value = 100, message = "Max Health is 100")
     @Min(value = 0, message =  "Min health 0")
     private int hitPoints;
-    @NotNull
     private int x;
-    @NotNull
     private int y;
 
+
+    public  PlayerModel(String name, String ClassP)
+    {
+        this.name = name;
+        this.ClassP = ClassP;
+    }
     public PlayerModel(String name, String ClassP, int level, int Experience, int Attack,
                        int defence, int hitPoints) {
         this.name = name;
@@ -97,5 +104,7 @@ public class PlayerModel {
 
     public int getY() { return y; }
     public void setY(int y) { this.y = y; }
+
+    public void	setPosition(int y, int x) { this.y = y; this.x = x; }
 }
 

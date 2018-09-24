@@ -25,11 +25,6 @@ public class PlayerController {
 
     }
 
-    public void registerEnemy(PlayerModel enemy) {
-
-        this.enemies.add(enemy);
-    }
-
     public void fightingSimulation(){
 
     }
