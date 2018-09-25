@@ -9,8 +9,8 @@ import java.util.Random;
 
 public class ArenaController {
 
-    private PlayerModel playerModel;
-    private PlayerModel enemyModel;
+    public static PlayerModel playerModel;
+    public static PlayerModel enemyModel;
     private static List<PlayerModel> enemies;
     public static char[][] arena;
     private ArenaView arenaView;
@@ -53,7 +53,13 @@ public class ArenaController {
     }
 
     public static void fighting(PlayerModel fightRival) {
+        String 				prepareFight;
+        PlayerModel			player1;
+        PlayerModel 		player2;
 
+        enemyModel = fightRival;
+        System.out.print(ArenaController.playerModel.getName() + " vs " +
+                fightRival.getName() + "\n");
     }
 
     public static int buildArena(PlayerModel hero) {
@@ -106,6 +112,11 @@ public class ArenaController {
         return false;
     }
 
+    public static boolean outOfBound(PlayerModel hero){
+
+        return true;
+   }
+
     public static PlayerModel getEnemy(PlayerModel hero){
 
         for(PlayerModel enemy: enemies) {
@@ -135,13 +146,13 @@ public class ArenaController {
         arena[hero.getY()][hero.getX()] = 'H';
     }
 
-    public  static boolean randerGame(PlayerModel hero, int wholeMap){
+    public  static boolean renderGame(PlayerModel hero, int wholeMap){
         ArenaConsoleView.printDetails(hero, wholeMap);
 
         return (true);
     }
 
-    public static void	goBack() {
-
+    public static void	goBack(PlayerModel hero) {
+        hero.setX(hero.getX() - 1);
     }
 }

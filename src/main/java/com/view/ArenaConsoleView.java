@@ -42,14 +42,18 @@ public abstract class ArenaConsoleView extends Player_View implements Display {
             for (int x = 0; x < wholeMap; x++)
             {
                 if(ArenaController.arena[y][x] != '*')
-                    System.out.print("[ "+ArenaController.arena[y][x] +" ]");
+                    System.out.print("[ " + ArenaController.arena[y][x] + " ]");
                 else
                     System.out.print("[   ]");
             }
             System.out.println();
 
         }
-        if(ArenaController.enemyEncountered(hero)) {
+
+        if (ArenaController.outOfBound(hero))
+            System.out.println(hero.getName() + "WON THE GAME");
+
+           else if(ArenaController.enemyEncountered(hero)) {
             fightOrFlight(ArenaController.getEnemy(hero));
         }
         else {
@@ -72,7 +76,7 @@ public abstract class ArenaConsoleView extends Player_View implements Display {
         int option;
 
             do {
-                System.out.print("Do you choose to fight " + enemy.getName() + " XP = " + enemy.getExperience() + " level = " + enemy.getLevel() + "?");
+                System.out.println("\nDo you choose to fight " + enemy.getName() + " XP = " + enemy.getExperience() + " level = " + enemy.getLevel() + "?");
                 System.out.println("==============");
                 System.out.println("|| 1. Fight ||");
                 System.out.println("|| 2. Run   ||");
@@ -81,8 +85,7 @@ public abstract class ArenaConsoleView extends Player_View implements Display {
             } while (option < 1 && option > 2);
             if (option == 1) {
                 ArenaController.fighting(enemy);
-                return ;
             }
-        ArenaController.goBack();
+        ArenaController.goBack(ArenaController.playerModel);
     }
 }

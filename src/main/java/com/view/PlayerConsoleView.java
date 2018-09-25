@@ -41,7 +41,6 @@ public class PlayerConsoleView extends Player_View implements Display {
 
     public void createPlayer()
     {
-        PlayerModel playerModel;
         String name, temp, rank;
         int level;
 
@@ -59,7 +58,7 @@ public class PlayerConsoleView extends Player_View implements Display {
             createPlayer();
         else{
             int wholeMap = ArenaController.buildArena(hero);
-            while (ArenaController.randerGame(hero, wholeMap));
+            while (ArenaController.renderGame(hero, wholeMap));
         }
 
     }
