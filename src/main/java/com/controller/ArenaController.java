@@ -58,6 +58,12 @@ public class ArenaController {
         PlayerModel 		player2;
 
         enemyModel = fightRival;
+        if (playerModel == null) {
+            System.out.println("model is null");
+        }
+        if (fightRival == null) {
+            System.out.println("rival is null");
+        }
         System.out.print(ArenaController.playerModel.getName() + " vs " +
                 fightRival.getName() + "\n");
     }
@@ -112,10 +118,10 @@ public class ArenaController {
         return false;
     }
 
-    public static boolean outOfBound(PlayerModel hero){
-
-        return true;
-   }
+//    public static boolean outOfBound(PlayerModel hero){
+//
+//        return true;
+//   }
 
     public static PlayerModel getEnemy(PlayerModel hero){
 
@@ -147,12 +153,14 @@ public class ArenaController {
     }
 
     public  static boolean renderGame(PlayerModel hero, int wholeMap){
+        playerModel = hero;
         ArenaConsoleView.printDetails(hero, wholeMap);
 
         return (true);
     }
 
     public static void	goBack(PlayerModel hero) {
+        playerModel = hero;
         hero.setX(hero.getX() - 1);
     }
 }

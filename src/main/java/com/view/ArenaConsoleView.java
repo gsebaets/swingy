@@ -50,13 +50,14 @@ public abstract class ArenaConsoleView extends Player_View implements Display {
 
         }
 
-        if (ArenaController.outOfBound(hero))
-            System.out.println(hero.getName() + "WON THE GAME");
+//        if (ArenaController.outOfBound(hero))
+//            System.out.println(hero.getName() + "WON THE GAME");
 
-           else if(ArenaController.enemyEncountered(hero)) {
+           if(ArenaController.enemyEncountered(hero)) {
             fightOrFlight(ArenaController.getEnemy(hero));
         }
         else {
+            System.out.println();
             System.out.println("Navigation");
             System.out.println("==============");
             System.out.println("|| 1. North ||");
