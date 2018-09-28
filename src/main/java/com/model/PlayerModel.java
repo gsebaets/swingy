@@ -15,7 +15,7 @@ public class PlayerModel {
     @NotNull(message = "Class can't be blank")
     private String ClassP;
     @NotNull
-    @Max(value = 30, message = "Level cannot pass 2")
+    @Max(value = 9, message = "Level cannot pass 9")
     @Min(value = 1, message = "Level cannot be bellow 1")
     private int level;
     @NotNull

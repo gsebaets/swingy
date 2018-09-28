@@ -119,8 +119,10 @@ public class ArenaController {
     }
 
 //    public static boolean outOfBound(PlayerModel hero){
-//
+//        if(hero.getX() == -1 || hero.getY() == -1)
 //        return true;
+//        else
+//        return false;
 //   }
 
     public static PlayerModel getEnemy(PlayerModel hero){
@@ -155,7 +157,6 @@ public class ArenaController {
     public  static boolean renderGame(PlayerModel hero, int wholeMap){
         playerModel = hero;
         ArenaConsoleView.printDetails(hero, wholeMap);
-
         return (true);
     }
 
