@@ -57,8 +57,7 @@ public class ArenaController {
 
         Random random = new Random();
 
-        int attack = random.nextInt(50 - 25 + 1) + 25;
-
+       int attack = random.nextInt(50 - 25 + 1) + 25;
         enemyModel = fightRival;
         System.out.println(ArenaController.playerModel.getName() + " vs " + fightRival.getName());
 
@@ -125,11 +124,9 @@ public class ArenaController {
         return false;
     }
 
-//    public static boolean outOfBound(PlayerModel hero, int wholeMap){
-//        (if hero.getX())
-//            return true;
-//        return false;
-//   }
+    public static boolean outOfBound(PlayerModel hero, int wholeMap){
+        return true;
+   }
 
     public static PlayerModel getEnemy(PlayerModel hero){
 
@@ -168,6 +165,6 @@ public class ArenaController {
 
     public static void	goBack(PlayerModel hero) {
         playerModel = hero;
-        hero.setX(hero.getX() - 1);
+        hero.setX(hero.getX() + 1);
     }
 }
