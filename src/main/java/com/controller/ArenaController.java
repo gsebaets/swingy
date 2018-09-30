@@ -4,6 +4,7 @@ import com.model.PlayerModel;
 import com.view.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -53,19 +54,25 @@ public class ArenaController {
     }
 
     public static void fighting(PlayerModel fightRival) {
-        String 				prepareFight;
-        PlayerModel			player1;
-        PlayerModel 		player2;
+
+        Random random = new Random();
+
+        int attack = random.nextInt(50 - 25 + 1) + 25;
 
         enemyModel = fightRival;
-        if (playerModel == null) {
-            System.out.println("model is null");
+        System.out.println(ArenaController.playerModel.getName() + " vs " + fightRival.getName());
+
+        removeEnemy(fightRival);
+    }
+
+    public static void removeEnemy(PlayerModel fightRival){
+        for (Iterator<PlayerModel> iter = enemies.listIterator(); iter.hasNext(); ) {
+            PlayerModel tempEnemy = iter.next();
+            if (enemyModel == tempEnemy) {
+                iter.remove();
+                System.out.println("You killed " + fightRival.getName());
+            }
         }
-        if (fightRival == null) {
-            System.out.println("rival is null");
-        }
-        System.out.print(ArenaController.playerModel.getName() + " vs " +
-                fightRival.getName() + "\n");
     }
 
     public static int buildArena(PlayerModel hero) {
@@ -118,10 +125,9 @@ public class ArenaController {
         return false;
     }
 
-//    public static boolean outOfBound(PlayerModel hero){
-//        if(hero.getX() == -1 || hero.getY() == -1)
-//        return true;
-//        else
+//    public static boolean outOfBound(PlayerModel hero, int wholeMap){
+//        (if hero.getX())
+//            return true;
 //        return false;
 //   }
 

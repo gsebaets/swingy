@@ -49,10 +49,6 @@ public abstract class ArenaConsoleView extends Player_View implements Display {
             System.out.println();
 
         }
-
-//        if (ArenaController.outOfBound(hero))
-//            System.out.println(hero.getName() + "   WON THE GAME");
-
             if(ArenaController.enemyEncountered(hero)) {
             fightOrFlight(ArenaController.getEnemy(hero));
         }
@@ -77,7 +73,7 @@ public abstract class ArenaConsoleView extends Player_View implements Display {
         int option;
 
             do {
-                System.out.println("\nDo you choose to fight " + enemy.getName() + " XP = " + enemy.getExperience() + " level = " + enemy.getLevel() + "?");
+                System.out.println("\nDo you choose to fight " + enemy.getName() + "?");
                 System.out.println("==============");
                 System.out.println("|| 1. Fight ||");
                 System.out.println("|| 2. Run   ||");
