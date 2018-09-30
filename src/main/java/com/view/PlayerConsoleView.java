@@ -57,8 +57,8 @@ public class PlayerConsoleView extends Player_View implements Display {
         if (!validatePlayer(hero))
             createPlayer();
         else{
-            int wholeMap = ArenaController.buildArena(hero);
-            while (ArenaController.renderGame(hero, wholeMap));
+            ArenaController.buildArena(hero);
+            while (ArenaController.renderGame(hero));
         }
 
     }

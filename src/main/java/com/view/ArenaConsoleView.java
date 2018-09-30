@@ -1,7 +1,7 @@
 package com.view;
 
 import com.controller.ArenaController;
-import com.controller.PlayerController;
+import com.controller.*;
 import com.model.PlayerModel;
 
 import javax.swing.text.html.Option;
@@ -49,10 +49,22 @@ public abstract class ArenaConsoleView extends Player_View implements Display {
             System.out.println();
 
         }
+
             if(ArenaController.enemyEncountered(hero)) {
             fightOrFlight(ArenaController.getEnemy(hero));
         }
         else {
+
+                if (hero.getX() == 0 || hero.getX() == wholeMap - 1) {
+                    System.out.println("You Have Won the game");
+                   // databaseController.savePLayer(hero);
+                    System.exit(1);
+                }
+                if (hero.getY() == 0 || hero.getY() == wholeMap - 1) {
+                  // databaseController.savePLayer(hero);
+                    System.out.println("You Have Won the game");
+                    System.exit(1);
+                }
             System.out.println();
             System.out.println("  Navigation");
             System.out.println("==============");
@@ -73,7 +85,7 @@ public abstract class ArenaConsoleView extends Player_View implements Display {
         int option;
 
             do {
-                System.out.println("\nDo you choose to fight " + enemy.getName() + "?");
+                System.out.println("\nDo you choose to fight " + enemy.getName() +"?");
                 System.out.println("==============");
                 System.out.println("|| 1. Fight ||");
                 System.out.println("|| 2. Run   ||");
@@ -83,6 +95,7 @@ public abstract class ArenaConsoleView extends Player_View implements Display {
             if (option == 1) {
                 ArenaController.fighting(enemy);
             }
-        ArenaController.goBack(ArenaController.playerModel);
+            else
+                ArenaController.goBack(ArenaController.playerModel, enemy);
     }
 }

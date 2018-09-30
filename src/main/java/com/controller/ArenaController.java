@@ -2,6 +2,7 @@ package com.controller;
 
 import com.model.PlayerModel;
 import com.view.*;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,10 +15,7 @@ public class ArenaController {
     public static PlayerModel enemyModel;
     private static List<PlayerModel> enemies;
     public static char[][] arena;
-    private ArenaView arenaView;
-    int width;
-    int height;
-
+    static int wholeMap;
     public ArenaController() {
 
     }
@@ -57,7 +55,7 @@ public class ArenaController {
 
         Random random = new Random();
 
-       int attack = random.nextInt(50 - 25 + 1) + 25;
+        int attack = random.nextInt(50 - 25 + 1) + 25;
         enemyModel = fightRival;
         System.out.println(ArenaController.playerModel.getName() + " vs " + fightRival.getName());
 
@@ -74,12 +72,13 @@ public class ArenaController {
         }
     }
 
-    public static int buildArena(PlayerModel hero) {
-        int wholeMap;
+    public static void buildArena(PlayerModel hero) {
 
         wholeMap = (hero.getLevel() - 1) * 5 + 10 - (hero.getLevel() % 2);
         hero.setY(wholeMap/2);
         hero.setX(wholeMap/2);
+        hero.setOldX(wholeMap/2);
+        hero.setOldY(wholeMap/2);
         arena = new char[wholeMap][wholeMap];
         for (int y = 0; y < wholeMap; y++) {
             for (int x = 0; x < wholeMap; x++) {
@@ -88,12 +87,11 @@ public class ArenaController {
         }
 
         arena[hero.getY()][hero.getX()] = 'H';
-        randomPlayerPosition(hero, wholeMap);
+        randomPlayerPosition(hero);
 
-        return (wholeMap);
     }
 
-    private static void randomPlayerPosition(PlayerModel hero, int wholeMap){
+    private static void randomPlayerPosition(PlayerModel hero){
         Random	rand = new Random();
         int		maxEnemies = rand.nextInt((wholeMap * wholeMap) / 2) + 1;
         enemies = new ArrayList<>();
@@ -124,10 +122,6 @@ public class ArenaController {
         return false;
     }
 
-    public static boolean outOfBound(PlayerModel hero, int wholeMap){
-        return true;
-   }
-
     public static PlayerModel getEnemy(PlayerModel hero){
 
         for(PlayerModel enemy: enemies) {
@@ -140,6 +134,8 @@ public class ArenaController {
     public static void movement(int option, PlayerModel hero) {
 
         arena[hero.getY()][hero.getX()] = '*';
+        hero.setOldX(hero.getX());
+        hero.setOldY(hero.getY());
         switch (option){
             case 1: //North
                 hero.setY(hero.getY() - 1);
@@ -154,17 +150,30 @@ public class ArenaController {
                 hero.setY(hero.getY() + 1);
                 break;
         }
+
         arena[hero.getY()][hero.getX()] = 'H';
     }
 
-    public  static boolean renderGame(PlayerModel hero, int wholeMap){
+    public  static boolean renderGame(PlayerModel hero){
         playerModel = hero;
         ArenaConsoleView.printDetails(hero, wholeMap);
         return (true);
     }
 
-    public static void	goBack(PlayerModel hero) {
+    public static void goBack(PlayerModel hero, PlayerModel enemy) {
         playerModel = hero;
-        hero.setX(hero.getX() + 1);
+        Random random = new Random();
+        int running = random.nextInt(100 - 1 + 1) + 1;
+        if(running > 50){
+           fighting(enemy);
+        }
+        else
+        {
+            arena[hero.getY()][hero.getX()] = 'E';
+            hero.setX(hero.getOldX());
+            hero.setY(hero.getoldY());
+            arena[hero.getY()][hero.getX()] = 'H';
+        }
+
     }
 }

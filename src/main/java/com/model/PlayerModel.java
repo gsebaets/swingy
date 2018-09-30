@@ -35,6 +35,8 @@ public class PlayerModel {
     private int hitPoints;
     private int x;
     private int y;
+    private int oldX;
+    private int oldY;
 
 
     public  PlayerModel(String name, String ClassP)
@@ -112,6 +114,14 @@ public class PlayerModel {
 
     public int getY() { return y; }
     public void setY(int y) { this.y = y; }
+
+    public int getOldX(){return oldX;}
+    public void setOldX(int oldX) {this.oldX = oldX;}
+
+    public int getoldY(){return oldY;}
+    public void setOldY(int oldY) {this.oldY = oldY;}
+
+
 
     public void	setPosition(int y, int x) { this.y = y; this.x = x; }
 }

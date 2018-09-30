@@ -3,6 +3,7 @@ package com.controller;
 import com.model.*;
 import com.view.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerController {
@@ -70,7 +71,8 @@ public class PlayerController {
             this.display.createPlayer();
         }
         else if (option == 2) {
-           // this.display.choosePlayer();
+            ArrayList<PlayerModel> players = databaseController.getPlayers();
+           //this.display.choosePlayer(); Todo display saved players
 
         }
     }
