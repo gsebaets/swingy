@@ -1,11 +1,16 @@
 package com;
 
 import com.controller.PlayerController;
+import com.controller.databaseController;
 import com.view.*;
 
 public class swingy {
 
     public static void main(String[] args) {
+
+        databaseController.createDB();
+        databaseController.initDB();
+
 
         PlayerController playerController;
         Display display;

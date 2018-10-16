@@ -70,9 +70,10 @@ public class PlayerController {
         if (option == 1) {
             this.display.createPlayer();
         }
-        else if (option == 2) {
+        else if (option == 2)
+        {
             ArrayList<PlayerModel> players = databaseController.getPlayers();
-           //this.display.choosePlayer(); Todo display saved players
+           this.display.choosePlayer(players);
 
         }
     }

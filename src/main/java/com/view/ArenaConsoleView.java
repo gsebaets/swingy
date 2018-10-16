@@ -5,6 +5,7 @@ import com.controller.*;
 import com.model.PlayerModel;
 
 import javax.swing.text.html.Option;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -57,11 +58,11 @@ public abstract class ArenaConsoleView extends Player_View implements Display {
 
                 if (hero.getX() == 0 || hero.getX() == wholeMap - 1) {
                     System.out.println("You Have Won the game");
-                   // databaseController.savePLayer(hero);
+                    databaseController.savePLayer(hero);
                     System.exit(1);
                 }
                 if (hero.getY() == 0 || hero.getY() == wholeMap - 1) {
-                  // databaseController.savePLayer(hero);
+                    databaseController.savePLayer(hero);
                     System.out.println("You Have Won the game");
                     System.exit(1);
                 }
@@ -98,4 +99,6 @@ public abstract class ArenaConsoleView extends Player_View implements Display {
             else
                 ArenaController.goBack(ArenaController.playerModel, enemy);
     }
+
+
 }

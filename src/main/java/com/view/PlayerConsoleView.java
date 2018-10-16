@@ -56,7 +56,8 @@ public class PlayerConsoleView extends Player_View implements Display {
         PlayerModel hero = ArenaController.setStats(name, rank, level);
         if (!validatePlayer(hero))
             createPlayer();
-        else{
+        else
+        {
             ArenaController.buildArena(hero);
             while (ArenaController.renderGame(hero));
         }
@@ -95,6 +96,31 @@ public class PlayerConsoleView extends Player_View implements Display {
         }while(!valid);
         this.playerController.updatePlayerChoice(Integer.parseInt(temp));
      }
+
+    public void choosePlayer(ArrayList<PlayerModel> savedPlayers)
+    {
+        String choice = "";
+        do
+        {
+            if (!choice.equals(""))
+                System.out.println("Invalid choice.");
+            for (int i = 0; i < savedPlayers.size(); i++)
+            {
+                PlayerModel player = savedPlayers.get(i);
+                System.out.println("\t" + (i + 1) + ". Name: " + player.getName() + ", Class: " + player.getClassP() + ", Level: " + player.getLevel());
+            }
+            System.out.print("Choice: ");
+            scanner = new Scanner(System.in);
+            if (scanner.hasNextLine())
+                choice = scanner.nextLine();
+            else
+                System.exit(0);
+        }
+        while (!choice.matches("^\\d+?") ||  Integer.parseInt(choice) <= 0 || Integer.parseInt(choice) > savedPlayers.size());
+        PlayerModel hero = savedPlayers.get(Integer.parseInt(choice) - 1);
+        ArenaController.buildArena(hero);
+        while (ArenaController.renderGame(hero));
+    }
 
      private boolean validatePlayer(PlayerModel playerModel)
      {

@@ -1,7 +1,6 @@
 package com.controller;
 
 import com.model.PlayerModel;
-import com.sun.xml.internal.bind.v2.TODO;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -89,7 +88,7 @@ public class databaseController {
 
             statement = connection.createStatement();
 
-            String createDB = "create database if not exists swingy";
+            String createDB = "create database if not exists swingy2";
 
             statement.executeUpdate(createDB);
 
@@ -131,11 +130,11 @@ public class databaseController {
 
             String createHeroTable =
 
-                    "CREATE TABLE if not exists `swingy`.`players` (" +
+                    "CREATE TABLE if not exists `swingy2`.`players` (" +
 
                             "`name` TEXT NOT NULL , " +
 
-                            "`class` TEXT NOT NULL , " +
+                            "`classP` TEXT NOT NULL , " +
 
                             "`level` INT NOT NULL , " +
 
@@ -195,7 +194,7 @@ public class databaseController {
 
             String selectPlayers = "select *" +
 
-                    "from `swingy`.`players`";
+                    "from `swingy2`.`players`";
 
             ResultSet results = statement.executeQuery(selectPlayers);
 
@@ -205,17 +204,17 @@ public class databaseController {
 
                 name = results.getString("name");
 
-                classP = results.getString("class");
+                classP = results.getString("classP");
 
                 level = results.getInt("level");
 
-                exp = results.getInt("exp");
+                exp = results.getInt("experience");
 
-                atk = results.getInt("atk");
+                atk = results.getInt("attack");
 
-                def = results.getInt("def");
+                def = results.getInt("defence");
 
-                hp = results.getInt("hp");
+                hp = results.getInt("hitPoints");
 
 
                 PlayerModel  player = new PlayerModel(name, classP, level, exp, atk, def, hp);
@@ -263,7 +262,7 @@ public class databaseController {
 
             statement = connection.createStatement();
 
-            String select = String.format("SELECT * FROM `swingy`.`players` WHERE (`name` = '%s' AND `ClassP` = '%s' AND " +
+            String select = String.format("SELECT * FROM `swingy2`.`players` WHERE (`name` = '%s' AND `ClassP` = '%s' AND " +
 
                             "`level` = %d AND `experience` = %d AND `attack` = %d AND `defence` = %d AND `hitPoints` = %d) " ,
 
@@ -329,7 +328,7 @@ public class databaseController {
 
                 statement = connection.createStatement();
 
-                String insertHero = String.format("INSERT INTO `swingy`.`players` (`name`, `classP`, `level`, `experience`," +
+                String insertHero = String.format("INSERT INTO `swingy2`.`players` (`name`, `classP`, `level`, `experience`," +
 
                                 " `attack`, `defence`, `hitPoints`) " +
 
